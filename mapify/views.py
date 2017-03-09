@@ -37,14 +37,10 @@ for tweet in iterator:
     if tweet_count <= 0:
         break
 
-res = es.search(index="idx_twp", doc_type="twitter_twp", q = 'text:"dormir"')
 # print(res)
 
-class LandingView(generic.ListView):
-    template_name = 'teamupapp/index.html'
-    context_object_name = 'category_list'
-
-
-def myApplications(request, userId):
-    myAppsList = ()
-    return render(request, 'teamupapp/myapps.html', {'myAppslist': myAppsList})
+def getTweets(request):
+    keyword = request.POST('keyword')
+    res = es.search(index="idx_twp", doc_type="twitter_twp", q='text:"'+keyword+'"')
+    tweetJson = json.dumps(res)
+    return render(request, 'mapify/index.html', {'tweetJson': tweetJson})
