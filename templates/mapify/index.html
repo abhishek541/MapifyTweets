@@ -13,14 +13,12 @@
 </head>
 <body>
     <p>Hello World !</p>
-    <form>
-        <select>
-            <option value="" selected>Select</option>
+    <form id="twForm">
+        <select name="keyword" onchange="this.form.submit();">
+            <option value="" >Select</option>
             <option value="trump">Trump</option>
             <option value="ban">ban</option>
         </select>
-
-        <input type="button" value="Submit" />
     </form>
     <div id="map"></div>
     <script>
