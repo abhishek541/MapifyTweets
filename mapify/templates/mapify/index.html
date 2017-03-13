@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mapify</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+    <style>
+       #map {
+        height: 400px;
+        width: 100%;
+       }
+	   
+	   div.container{
+	   border: 1px solid black;
+	   }
+    </style>
+</head>
+<body style="background-color:#F8F8F8">
+    <center><h2 style="color:Purple">MapifyTweets</h2>
+    <form id="twForm" action="" method="post">
+        {% csrf_token %}
+		<label style="font:10px">Select a Keyword:</label>
+        <select name="keyword" onchange="this.form.submit();">
+            <option value="" >Select</option>
+            <option value="trump">Trump</option>
+            <option value="weekend">Weekend</option>
+            <option value="best">Best</option>
+            <option value="ban">ban</option>
+        </select>
+    </form>
+	</center>
+	<br>
+	
+    <div id="map" class="container">
+    <script>
+        data_from_django = {{ tweetCoord|safe }};
+        console.log("coordinates: "+data_from_django.length);
+        function initMap() {
+
+
+            var map = new google.maps.Map(document.getElementById('map'), {
+                        zoom: 4,
+                        center: {lat: 41.850033, lng: -87.6500523}
+                        });
+
+            for (var i=0; i<data_from_django.length; i++){
+                markLocation(map, data_from_django[i]['coordinates'])
+            }
+
+        }
+
+        function markLocation(map, coordinates) {
+            var myLatLng = {lat: coordinates[1], lng: coordinates[0]};
+            var marker = new google.maps.Marker({
+                            position: myLatLng,
+                            map: map,
+                            title: 'Hello World!'
+                            });
+        }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAY41gy7JE5VdAWFbf3ZH4cMlIYfd9wsjs&callback=initMap">
+    </script>
+	</div>
+</body>
+</html>
