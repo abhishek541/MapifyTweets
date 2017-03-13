@@ -30,6 +30,7 @@ def getTweets(request):
         except:
             break
     coordinatesList = []
+    coordinatesList.append(keyword)
     for r in tweetJson:
         if (r['_source']['coordinates']):
             coordinatesList.append(r['_source']['coordinates'])
