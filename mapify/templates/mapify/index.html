@@ -29,18 +29,20 @@
 			<option value="liberal">Liberal</option>
 			<option value="weather">Weather</option>
 			<option value="weekend">Weekend</option>
-           		<option value="best">Best</option>
+            <option value="best">Best</option>
 			<option value="happy">Happy</option>
-            
+
         </select>
     </form>
 	</center>
 	<br>
-	
+    <h4>Mapped tweets for the word: <span id="keyword"></span></h4>
+        <br>
+        <br>
     <div id="map" class="container">
     <script>
         data_from_django = {{ tweetCoord|safe }};
-        console.log("coordinates: "+data_from_django.length);
+        //console.log("coordinates: "+data_from_django.length);
         function initMap() {
 
 
@@ -48,8 +50,9 @@
                         zoom: 4,
                         center: {lat: 41.850033, lng: -87.6500523}
                         });
+            document.getElementById('keyword').innerHTML = data_from_django[0];
 
-            for (var i=0; i<data_from_django.length; i++){
+            for (var i=1; i<data_from_django.length; i++){
                 markLocation(map, data_from_django[i]['coordinates'])
             }
 
