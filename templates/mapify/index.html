@@ -9,21 +9,29 @@
         height: 400px;
         width: 100%;
        }
+	   
+	   div.container{
+	   border: 1px solid black;
+	   }
     </style>
 </head>
-<body>
-    <p>Hello World !</p>
+<body style="background-color:#F8F8F8">
+    <center><h2 style="color:Purple">MapifyTweets</h2>
     <form id="twForm" action="" method="post">
         {% csrf_token %}
+		<label style="font:10px">Select a Keyword:</label>
         <select name="keyword" onchange="this.form.submit();">
             <option value="" >Select</option>
             <option value="trump">Trump</option>
+            <option value="weekend">Weekend</option>
+            <option value="best">Best</option>
             <option value="ban">ban</option>
-            <option value="talent">talent</option>
-            <option value="the">the</option>
         </select>
     </form>
-    <div id="map"></div>
+	</center>
+	<br>
+	
+    <div id="map" class="container">
     <script>
         data_from_django = {{ tweetCoord|safe }};
         console.log("coordinates: "+data_from_django.length);
@@ -53,5 +61,6 @@
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAY41gy7JE5VdAWFbf3ZH4cMlIYfd9wsjs&callback=initMap">
     </script>
+	</div>
 </body>
 </html>
