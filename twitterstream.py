@@ -19,7 +19,7 @@ ACCESS_SECRET="YOUR_ACCESS_SECRET_KEY"
 auth = OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
 auth.set_access_token(ACCESS_TOKEN, ACCESS_SECRET)
 
-es = Elasticsearch(['https://search-mapify-tweets-pcgkfb5ccbz3zi2ptcnkmsiqfi.us-east-1.es.amazonaws.com/'])
+es = Elasticsearch(['https://search-assignment1testdomain-mmaspwfvkwmpvzcydmwkzoa2qa.us-east-1.es.amazonaws.com/'])
 
 class MyListener(StreamListener):
     def on_data(self, data):
