@@ -10,7 +10,7 @@ except ImportError:
 
 from elasticsearch import Elasticsearch
 
-es = Elasticsearch(['https://search-mapify-tweets-pcgkfb5ccbz3zi2ptcnkmsiqfi.us-east-1.es.amazonaws.com/'])
+es = Elasticsearch(['https://search-assignment1testdomain-mmaspwfvkwmpvzcydmwkzoa2qa.us-east-1.es.amazonaws.com/'])
 
 def getTweets(request):
     try:
