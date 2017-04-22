@@ -45,21 +45,18 @@
         //console.log("coordinates: "+data_from_django.length);
         function initMap() {
 
-
+            var coordinates = {lat: 41.850033, lng: -87.6500523};
             var map = new google.maps.Map(document.getElementById('map'), {
                         zoom: 4,
                         center: {lat: 41.850033, lng: -87.6500523}
                         });
-            document.getElementById('keyword').innerHTML = data_from_django[0];
 
-            for (var i=1; i<data_from_django.length; i++){
-                markLocation(map, data_from_django[i]['coordinates'])
-            }
+            markLocation(map, coordinates);
 
         }
 
         function markLocation(map, coordinates) {
-            var myLatLng = {lat: coordinates[1], lng: coordinates[0]};
+            var myLatLng = {lat: coordinates.lat, lng: coordinates.lng};
             var marker = new google.maps.Marker({
                             position: myLatLng,
                             map: map,

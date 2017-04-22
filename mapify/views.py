@@ -10,25 +10,21 @@ except ImportError:
 
 from elasticsearch import Elasticsearch
 
-es = Elasticsearch(['https://search-assignment1testdomain-mmaspwfvkwmpvzcydmwkzoa2qa.us-east-1.es.amazonaws.com/'])
+#es = Elasticsearch(['https://search-assignment1testdomain-mmaspwfvkwmpvzcydmwkzoa2qa.us-east-1.es.amazonaws.com/'])
 
 def getTweets(request):
+    #headers = request.headers
+    print (request)
     try:
         keyword = request.POST['keyword']
     except:
         keyword = ""
     print("keyword: "+keyword)
-    res = es.search(index="idx_twp", doc_type="twitter_twp", q='text:"'+keyword+'"', scroll='60s', search_type='query_then_fetch')
-    scroll_size = res['hits']['total']
+    #res = es.search(index="idx_twp", doc_type="twitter_twp", q='text:"'+keyword+'"', scroll='60s', search_type='query_then_fetch')
+    #scroll_size = res['hits']['total']
+    scroll_size = 0
     tweetJson = []
-    while (scroll_size > 0):
-        try:
-            scroll_id = res['_scroll_id']
-            res = es.scroll(scroll_id=scroll_id, scroll='60s')
-            tweetJson += res['hits']['hits']
-            scroll_size = len(res['hits']['hits'])
-        except:
-            break
+
     coordinatesList = []
     coordinatesList.append(keyword)
     for r in tweetJson:
