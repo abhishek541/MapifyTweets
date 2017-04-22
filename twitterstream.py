@@ -48,8 +48,8 @@ class MyListener(StreamListener):
                  print (message)
 
             nlu = watson_developer_cloud.NaturalLanguageUnderstandingV1(version='2017-02-27',
-                                                                        username='ak6210@nyu.edu',
-                                                                        password='Cloud@12345')
+                                                                        username='',
+                                                                        password='')
             nlu.analyze(text=textdata,features=[features.Sentiment()])
 
 
