@@ -25,8 +25,8 @@
             <option value="trump">Trump</option>
 			<option value="president">President</option>
 			<option value="immigrants">Immigration</option>
-			<option value="economy">Economy</option>
-			<option value="liberal">Liberal</option>
+			<option value="and">And</option>
+			<option value="from">From</option>
 			<option value="weather">Weather</option>
 			<option value="weekend">Weekend</option>
             <option value="best">Best</option>
@@ -42,26 +42,54 @@
     <div id="map" class="container">
     <script>
         data_from_django = {{ tweetCoord|safe }};
-        //console.log("coordinates: "+data_from_django.length);
+        console.log("coordinates: "+data_from_django[1]['sentiment']);
         function initMap() {
 
-            var coordinates = {lat: 41.850033, lng: -87.6500523};
             var map = new google.maps.Map(document.getElementById('map'), {
                         zoom: 4,
                         center: {lat: 41.850033, lng: -87.6500523}
                         });
 
-            markLocation(map, coordinates);
+            document.getElementById('keyword').innerHTML = data_from_django[0];
+            for (var i=1; i<data_from_django.length; i++){
+                markLocation(map, data_from_django[i])
+            }
 
         }
 
-        function markLocation(map, coordinates) {
-            var myLatLng = {lat: coordinates.lat, lng: coordinates.lng};
-            var marker = new google.maps.Marker({
+        function markLocation(map, data) {
+            var coordinates = data['coordinates']['coordinates']
+            var sentiment = data['sentiment']
+            var myLatLng = {lat: coordinates[1], lng: coordinates[0]};
+            if (sentiment === "positive") {
+                var marker = new google.maps.Marker({
                             position: myLatLng,
                             map: map,
+                            icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
                             title: 'Hello World!'
                             });
+            } else if (sentiment === "negative") {
+                var marker = new google.maps.Marker({
+                            position: myLatLng,
+                            map: map,
+                            icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
+                            title: 'Hello World!'
+                            });
+            } else if (sentiment === "neutral") {
+                var marker = new google.maps.Marker({
+                            position: myLatLng,
+                            map: map,
+                            icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+                            title: 'Hello World!'
+                            });
+            } else {
+                var marker = new google.maps.Marker({
+                            position: myLatLng,
+                            map: map,
+                            icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png',
+                            title: 'Hello World!'
+                            });
+            }
         }
     </script>
     <script async defer

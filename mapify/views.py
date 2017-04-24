@@ -10,7 +10,7 @@ except ImportError:
 
 from elasticsearch import Elasticsearch
 
-#es = Elasticsearch(['https://search-assignment1testdomain-mmaspwfvkwmpvzcydmwkzoa2qa.us-east-1.es.amazonaws.com/'])
+es = Elasticsearch(['https://search-trends-fxlmyom7rqfue7wr4oho5oh2nq.us-east-1.es.amazonaws.com/'])
 
 def getTweets(request):
     #headers = request.headers
@@ -20,15 +20,23 @@ def getTweets(request):
     except:
         keyword = ""
     print("keyword: "+keyword)
-    #res = es.search(index="idx_twp", doc_type="twitter_twp", q='text:"'+keyword+'"', scroll='60s', search_type='query_then_fetch')
-    #scroll_size = res['hits']['total']
-    scroll_size = 0
+    res = es.search(index="trends", doc_type="twitter_twp", q='text:"'+keyword+'"', scroll='60s', search_type='query_then_fetch')
+    print("result: " + json.dumps(res))
+    scroll_size = res['hits']['total']
     tweetJson = []
+    while (scroll_size > 0):
+        try:
+            scroll_id = res['_scroll_id']
+            res = es.scroll(scroll_id=scroll_id, scroll='60s')
+            tweetJson += res['hits']['hits']
+            scroll_size = len(res['hits']['hits'])
+        except:
+            break
 
-    coordinatesList = []
-    coordinatesList.append(keyword)
+    tweetList = []
+    tweetList.append(keyword)
     for r in tweetJson:
         if (r['_source']['coordinates']):
-            coordinatesList.append(r['_source']['coordinates'])
-    #print("result: "+json.dumps(coordinatesList))
-    return render(request, 'mapify/index.html', {'tweetCoord': json.dumps(coordinatesList)})
+            tweetList.append({'coordinates': r['_source']['coordinates'], 'sentiment': r['_source']['sentiment']})
+    #print("result: "+json.dumps(tweetList))
+    return render(request, 'mapify/index.html', {'tweetCoord': json.dumps(tweetList)})
