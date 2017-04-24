@@ -1,8 +1,8 @@
 branch-defaults:
   master:
-    environment: trends-env
+    environment: LowCost-env
 environment-defaults:
-  trends-env:
+  LowCost-env:
     branch: null
     repository: null
 global:
