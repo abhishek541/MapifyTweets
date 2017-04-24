@@ -10,6 +10,10 @@ https://docs.djangoproject.com/en/1.10/howto/deployment/wsgi/
 import os, sys
 sys.path.insert(0, os.path.abspath(os.path.dirname(os.path.dirname(__file__))))
 
+for k in sorted(os.environ.keys()):
+    v = os.environ[k]
+    print ('%-30s %s' % (k,v[:70]))
+
 from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "MapifyTweets.settings")
