@@ -25,7 +25,7 @@ SECRET_KEY = '+u-9-5-*!6ef4yti6if1qc$fz06e_$_ti*@048!q-v$0wwlml8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['mapifytweets-dev.262bqwyngm.us-east-1.elasticbeanstalk.com', 'localhost']
+ALLOWED_HOSTS = ['lowcost-env.magijb8rpp.us-east-1.elasticbeanstalk.com', 'localhost', 'ffd1f722.ngrok.io']
 
 
 # Application definition
