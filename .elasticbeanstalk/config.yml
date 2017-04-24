@@ -1,10 +1,10 @@
 branch-defaults:
   master:
-    environment: LowCost-env
+    environment: trends-env
 environment-defaults:
-  LowCost-env:
-    branch: master
-    repository: MapifyTweets
+  trends-env:
+    branch: null
+    repository: null
 global:
   application_name: tweettrends
   default_ec2_keyname: null
