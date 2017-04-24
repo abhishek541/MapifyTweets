@@ -1,0 +1,19 @@
+branch-defaults:
+  master:
+    environment: LowCost-env
+environment-defaults:
+  LowCost-env:
+    branch: master
+    repository: MapifyTweets
+global:
+  application_name: tweettrends
+  default_ec2_keyname: null
+  default_platform: arn:aws:elasticbeanstalk:us-east-1::platform/Python 3.4 running
+    on 64bit Amazon Linux/2.3.3
+  default_region: us-east-1
+  instance_profile: null
+  platform_name: null
+  platform_version: null
+  profile: null
+  sc: git
+  workspace_type: Application
